@@ -1,0 +1,46 @@
+Requisitos Funcionales
+Autenticar usuario
+2. Cambiar contraseña
+3. Cerrar sesión
+4. Salva y restaura de la base de datos
+5. Visualizar trazas
+6. Gestionar usuarios y roles
+7. Gestionar nomencladores
+7.1. Gestionar país
+7.2. Gestionar mercado
+7.3. Gestionar agencia
+7.4. Gestionar servicio
+7.5. Gestionar producto
+7.6. Gestionar personal
+8. Sistema de notificaciones internas
+9. Gestión documental
+9.1. Control de cambio de documentación
+9.2. Consultar el acceso de solo lectura a documentos
+9.3. Cancelación de documentos obsoletos
+10. Gestión de acciones de mejoras
+10.1. Gestión de auditorías
+10.2. Gestionar no conformidades
+10.3. Gestionar acciones correctivas
+10.4. Gestionar acciones de mejoras
+11. Gestionar seguimiento
+11.1. Gestionar comités de calidad
+11.2. Gestionar Indicadores
+11.3. Gestionar objetivos de calidad
+11.4. Gestionar riesgos
+12. Gestión de procesos
+12.1. Gestionar Mapa de procesos
+13. Gestionar satisfacción del cliente
+13.1. Registrar las mediciones de la satisfacción de los clientes
+14. Reportes
+14.1. Informes de estado de cumplimiento de los indicadores.
+14.2. Informes de estado de cumplimiento de los objetivos de calidad.
+14.3. Informe de cumplimiento de los objetivos de calidad durante los
+últimos años y en los años venideros.
+14.4. Resumen Anual de Indicadores Objetivos.
+14.5. Planificación anual de seguimientos objetivos.
+14.6. Planificación de seguimientos objetivos.
+14.7. Informe de estado de no conformidad y control de plazos.
+14.5. Informes estadísticos semanales, mensuales y anuales de los no
+conformidades registradas y cerradas.
+14.6. Graficar los estados de las no conformidades.
+15. Reportes configurables
