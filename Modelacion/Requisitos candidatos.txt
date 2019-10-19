@@ -1,0 +1,36 @@
+Requisitos candidatos
+1. Gestionar usuarios
+2. Salva y restaura 
+3. Gestionar roles
+4. Gestionar nomencladores
+5. Sistema de notificaciones internas
+6. Gestión documental
+6.1. Control de cambio de documentación
+6.2. Consultar el acceso de solo lectura a documentos
+6.3. Cancelación de documentos obsoletos
+7. Gestión de acciones de mejoras
+7.1. Gestión de auditorías
+7.2. Gestionar no conformidades
+7.3. Gestionar acciones correctivas
+7.4. Gestionar acciones de mejoras
+8. Gestionar seguimiento
+8.1. Gestionar comités de calidad
+8.2. Gestionar Indicadores
+8.3. Gestionar objetivos de calidad
+8.4. Gestionar riesgos
+9. Gestión de procesos
+9.1. Gestionar Mapa de procesos
+10. Gestionar satisfacción del cliente
+10.1. Registrar las mediciones de la satisfacción de los clientes
+11. Reportes
+11.1. Informes de estado de cumplimiento de los indicadores.
+11.2. Informes de estado de cumplimiento de los objetivos de calidad.
+11.3. Informe de cumplimiento de los objetivos de calidad durante los últimos años y en los años venideros.
+11.4. Resumen Anual de Indicadores Objetivos.
+11.5. Planificación anual de seguimientos objetivos.
+11.6. Planificación de seguimientos objetivos.
+11.7. Informe de estado de no conformidad y control de plazos.
+11.5. Informes estadísticos semanales, mensuales y anuales de los no conformidades registradas y cerradas.
+11.6. Graficar los estados de las no conformidades.
+12. Reportes configurables
+
