@@ -1,0 +1,18 @@
+Reglas del negocio
+1. Las quejas o reclamaciones deben ser respondidas antes de que el cliente abandone la instalación o el país, o en un período no mayor de 72 horas, a partir de la recepción de la queja.
+2. Si no se puede dar al cliente respuesta en un plazo de 72 horas por características, circunstancias y naturales de su objeto y se precisa profundizar en la investigación, entonces el plazo se pudiera extender hasta 30 días naturales.
+3. El plazo para la aceptación de una queja o reclamación de clientes por insatisfacción del servicio recibido será de 1 año, contando a partir del momento en el que ocurre el hecho que motive la insatisfacción.
+4. Si la queja o reclamación proviene de un prestatario, tendrá un plazo establecido por contrato para formularla.
+5. Los términos para dar respuesta a un prestatario serán de hasta 30 días naturales, pudiendo prorrogarse hasta 60 días, previa autorización del jefe máximo de la entidad receptora de la queja.
+6. La evaluación de una incidencia debe realizarse en el término de 48 horas como máximo a partir del momento en que se recepcione el Reporte de Incidencia.
+7. Si la queja o reclamación es recepcionada en el país origen del cliente, entonces el Director de la Agencia en el Exterior o funcionario de atención al cliente de la misma, debe enviarla en un plazo no mayor de 24 horas después de recibida.
+8. En Cuba el receptor de la queja o reclamación entregará impreso o vía email en un plazo no mayor de 24 horas al especialista encargado de la actividad de calidad.
+9. La queja o reclamación debe ser traducida en las 24 horas siguientes a la recepción de esta.
+10. Si el cliente recibió compensación no procede la reclamación.
+11. Los directores y jefes de áreas internas dispondrán de hasta 5 días hábiles para emitir los criterios correspondientes de la no conformidad.
+12. El prestatario de servicio debe enviar respuesta de la no conformidad por escrito dentro del plazo de los 15 días siguientes a la fecha de su notificación.
+13. Las sucursales deben enviar respuesta de la no conformidad de hasta 5 días hábiles para la retroalimentación.
+14. Si la compensación por pax es menor que 100.00 CUC es facultad del jefe máximo de la entidad otorgarle, en caso de que sea mayor que 100.00 CUC, lo debe aprobar el Director General de Havanatur.
+15. Para darle tratamiento a las acciones correctivas deberá estar registrada y revisada la no conformidad detectada.   
+
+

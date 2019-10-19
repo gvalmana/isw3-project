@@ -1,0 +1,31 @@
+Actores, trabajadores y posibles casos de uso
+Actores del negocio:
+* Cliente
+* Supervisor 
+* Especialista de calidad
+* Funcionarios
+* Sucursales
+Trabajadores del negocio:
+* Funcionario
+* Director de la agencia en el exterior
+* Especialista de calidad
+* Sucursales
+* Grupo multidisciplinario
+* Director de sucursal o jefe máximo de la entidad
+* Area económica
+* Jefe de área
+
+
+Posibles casos de uso:
+* Comunicar no conformidad
+* Comunicación verbal
+* Registrar no conformidad
+* Analizar no conformidad
+* Traducir la queja o reclamación
+* Aplicar compensación
+* Registrar gastos por compensación
+* Generar dictamen
+* Notificar al cliente
+* Apelar resultados
+* Cerrar no conformidad
+
