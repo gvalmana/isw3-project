@@ -1,0 +1,9 @@
+Definir actores del sistema
+* Auditor
+* Supervisor o guía
+* Especialista de calidad
+* Jefe de proceso
+* Director de la sucursal
+* Adminsys
+* Reloj
+

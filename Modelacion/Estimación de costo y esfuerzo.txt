@@ -1,0 +1,110 @@
+Estimación de costo y esfuerzo
+
+Estimación basada en casos de uso
+Para la estimación del esfuerzo y el costo del proyecto se emplea la técnica de la estimación por casos de usos, la cual sigue el siguiente orden de trabajo.
+1. Calcular los Puntos de Caso de Uso (PCU)
+1.1. Calcular el Factor de Peso de los Actores (FPA) 
+1.2. Calcular el Factor de Peso de los Casos de Uso (FPCU)
+2. Calcular los puntos de Caso de Uso Ajustados (PCUA)
+2.1. Calcular el Factor de Complejidad Técnica (FCT)
+2.2. Calcular el Factor de Ambiente (FA)
+3. Calcular el Esfuerzo de Desarrollo (E)
+4. Estimar el costo total de desarrollo basado en las horas/hombre.
+
+Factor de Peso de los Actores sin ajustar (FPA):
+NºActorPuntos por complejidad1Auditor32Supervisor o Guía33Esp. De Calidad34Jefe de Proceso35Director de Sucursal36AdminSys37Reloj2TOTAL20
+FPA = (Factor de peso por cantidad) i
+FPA = 0*1+1*2+6*3
+FPA = 20
+
+Factor de Peso de los Casos de Usos sin Ajustar (FPCU):
+NºCUTransaccionesComplejidadPuntos1Registrar no Conformidad16Alta15a. Registrar NC Producto/ Servicio
+b. Registrar NC Auditoría2Gestionar Indicadores6Media103Gestionar Objetivos de Calidad6Media104Gestionar Mapa de Procesos6Media105Crear solicitud investigación NC4Baja56Analizar causas de NC6Media107Gestionar acciones preventivas6Media108Gestionar acciones de mejoras6Media109Gestionar documentos12Alta1510Gestionar Riesgos6Media1011Notificar retrasos de NC4Baja512Notificaciones automáticas4Baja513Cerrar NC4Baja514Autenticar usuario4Baja515Gestionar Usuarios y Roles8Alta1516Salvar Base de Datos3Baja517Restaurar Base de Datos3Baja518Visualizar trazas3Baja519Solicitud de nueva contraseña4Baja520Cerrar sesión3Baja521Generar Informes de Calidad4Baja522Generar Informes Configurables6Media1023Visualizar gráfico de estado de NC4Alta1524Organizador de reuniones9Alta1525Predecir comportamiento de NC4Baja5TOTAL230
+FPCU = ? [(Factor de peso en i) * (Cantidad de CU de tipo i)]
+FPCU = 12*5+8*10+6*15
+FPCU = 60+90+80
+FPCU = 230
+
+Por lo tanto, si: FPA = 20 y FPCU = 230
+PCU = FPA + FPCU
+PCU = 20 + 230
+PCU = 250
+
+Cálculo de Puntos de casos de uso ajustados (PCUA)
+Una vez que se tienen los puntos de los casos de uso sin ajustar, se debe ajustar ese valor mediante la siguiente ecuación:
+PCUA = PCU*FCT*FA
+Donde: 
+PCUA: Puntos de casos de uso ajustados
+PCU: Puntos de casos de uso sin ajustar
+FCT: Factor de complejidad técnica
+FA: Factor Ambiental
+
+Cálculo del Factor de Complejidad Técnica (FCT):
+FactorDescripciónPesoValorResultadoT1Sistema distribuido 200T2Objetivos de performance o tiempo de respuesta 111T3Eficiencia del usuario final 111T4Procesamiento interno complejo 133T5El código debe ser reutilizable 100T6Facilidad de instalación 0,500T7Facilidad de uso 0,510,5T8Portabilidad200T9Facilidad de cambio 111T10Concurrencia10T11Incluye objetivos especiales de seguridad 100T12Provee acceso directo a terceras partes 100T13Se requieren facilidades especiales de entrenamiento a usuarios 100Total6,5
+FCT = 0.6+0.01 * ? (Pesoi*Valor asignadoi)
+FCT = 0.6+0.01*6.5
+FCT = 0.6+0.065
+FTC = 0.665
+
+Cálculo del Factor de Ambiente (FA):
+FA = 1.4 – 0.03 * ? (Pesoi*Valor asignadoi)
+Haciendo un análisis de lo que plantea cada factor a medir, las características del equipo de desarrollo y de la solución a desarrollar se asignaron los siguientes valores a cada factor:
+Factor Descripción PesoValorResultadoE1Familiaridad con el modelo de proyecto utilizado 1,500E2Experiencia en la aplicación 0,521E3Experiencia en orientación a objetos 144E4Capacidad del analista líder 0,5105E5Motivación 155E6Estabilidad de los requerimientos 20.51E7Personal a tiempo compartido-100E8Dificultad del lenguaje de programación -100Total16
+
+Luego, si FA = 1.4 – 0.03 * ? (Pesoi * Valor asignadoi)
+FA = 1.4 – 0.03*16
+FA = 1.4-0.48
+FA = 0.92
+Por lo tanto, si: PCU=250, FCT=0.665 y FA=0.92
+PCUA = PCU*FCT*FA
+PCUA = 250*0.665*0.92
+PCUA = 152.95
+Cálculo del esfuerzo de desarrollo (E)
+E = PCUA * FC
+Donde:
+E: Esfuerzo estimado en horas-hombres
+PCUA: Puntos de casos de uso ajustados
+FC: Factor de conversión
+Solamente tres factores entre 1 y 6 de los que afectan al FA, están por debajo del factor medio 3.
+No existen factores de los que afectan al FA por encima del valor medio de 3, para los factores 7 y 8.
+Como la suma de los factores obtenidos es 3 porque 3+0=3 se utiliza el factor de conversión 20 horas hombre punto de casos de uso, por consiguiente:
+E = PCUA * FC
+E = 152.95 * 20
+E = 3059 horas
+ActividadPorcentajeHoras-HombreAnálisis10%764.75 Diseño20%1 529.5Implementación40%3059Pruebas15%1 147.125Sobrecarga (otras actividades)15%1 147.125Esfuerzo Total E(T)100%7 647.5
+
+Estimación del tiempo (TDes)
+TDes = E (Total)/CH
+Donde:
+E (Total): Esfuerzo total.
+CH: Cantidad de hombres que desarrollan el proyecto.
+Por lo tanto, para el desarrollador que lleva a cabo el proyecto la estimación del tiempo de desarrollo de éste es:
+TDes = (7 647.5 horas-hombres) / 1 hombre
+TDes = 7 647.5 horas/hombres
+Al dividirse TDes entre horas/años de la cantidad de meses de duración de la realización del proyecto aproximadamente.
+Como la cantidad de días laborables son 5.5 días/semanas y una jornada laboral es de 8horas/días y en el año se trabajan 52 semanas entonces se multiplican y se dividen entre 12meses/años obteniéndose 190.6 horas/mes como promedio.
+TDes= 7 647.5 / 190.6
+TDes= 40 meses aproximadamente
+Lo cual significa que el tiempo de desarrollo del proyecto es de 3 años y medio de duración aproximadamente.
+
+
+Cálculo de la Estimación del costo de desarrollo del proyecto.
+C = E(Total)*CHH
+C(p) = E(T) * K * THP
+Teniendo en cuenta que se cuenta con 1 desarrollador, analicemos su salario:
+DesarrolladorSalarioAnalista$415.00
+SP = $415.00 / 1
+SP = $415.00
+
+La Tarifa Horaria promedio será:
+THP = SP / 190.6
+THP = $415.00 / 190.6
+THP = $2.18
+Por lo que el costo C(p) utilizando K=1.5 sería:
+C(p) = E(T) * K * THP
+C(p) = 7 647.5 * 1.5 * $2.18
+C(p) = 11 471.25 * $2.18
+C(p) = $ 25 007.33 (CUP).
+
+
+
