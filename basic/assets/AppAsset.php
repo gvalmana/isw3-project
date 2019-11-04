@@ -34,7 +34,7 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/main.js',
         'js/jquery/dist/jquery.min.js',
-        'js/bootstrap/dist/js/bootstrap.min.js'
+        'js/bootstrap/dist/js/bootstrap.min.js',
         'js/fastclick/lib/fastclick.js',
         'js/nprogress/nprogress.js',
         'js/Chart.js/dist/Chart.min.js',
