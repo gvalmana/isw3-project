@@ -37,7 +37,7 @@
         "beaten-sect0r/yii2-db-manager": "*",
         "asinfotrack/yii2-audittrail": "^0.8.4",
         "nhkey/yii2-activerecord-history": "*",
-        "johnitvn/yii2-ajaxcrud": "*",
+        "johnitvn/yii2-ajaxcrud": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

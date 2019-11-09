@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $content string */
 
 
-if (Yii::$app->controller->action->id === 'login' || Yii::$app->controller->route === 'user/recovery/request') { 
+if (Yii::$app->controller->action->id === 'login' || Yii::$app->controller->route === 'user/recovery/request') {
 /**
- * Do not use this code in your template. Remove it. 
+ * Do not use this code in your template. Remove it.
  * Instead, use the code  $this->layout = '//main-login'; in your controller.
  */
     echo $this->render(
@@ -18,11 +18,11 @@ if (Yii::$app->controller->action->id === 'login' || Yii::$app->controller->rout
 
 else {
     if (class_exists('backend\assets\AppAsset')) {
-        backend\assets\AppAsset::register($this);
+        app\assets\AppAsset::register($this);
     } else {
         app\assets\AppAsset::register($this);
     }
-    backend\assets\AdminLtePluginAsset::register($this);
+    app\assets\AdminLtePluginAsset::register($this);
     dmstr\web\AdminLteAsset::register($this);
 
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');

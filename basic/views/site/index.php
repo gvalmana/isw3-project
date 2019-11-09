@@ -1,13 +1,12 @@
 <?php
 
 /* @var $this yii\web\View */
-use yiister\gentelella\widgets\Panel;
+//use yiister\gentelella\widgets\Panel;
 use yii\helpers\Html;
 
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
-<?php  Panel::begin()?>
     <div class="jumbotron">
         <h1>Havanatur</h1>
 
@@ -16,7 +15,6 @@ $this->title = 'My Yii Application';
         <p><a class="btn btn-lg btn-success" href="http://localhost/basic/web/noconformidad/">Registrar No conformidad</a></p>
     </div>
 
-<?php Panel::end()?>
     <div class="body-content">
 
         <div class="row">
