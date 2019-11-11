@@ -6,7 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'language' => 'es-ES',
-    'sourceLanguage' => 'en-US',    
+    'sourceLanguage' => 'en-US',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -17,8 +17,11 @@ $config = [
         'admin' => [
             'class' => 'mdm\admin\Module',
             'layout'=> 'top-menu',
-        ]            
-    ],        
+        ],
+        'seguridad' => [
+            'class' => 'app\modules\seguridad\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -26,7 +29,7 @@ $config = [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
-        ],        
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -36,8 +39,9 @@ $config = [
         ],*/
         'user' => [
             'identityClass' => 'mdm\admin\models\User',
-            'loginUrl' => ['admin/user/login'],
-        ],        
+            'loginUrl' => ['/site/login'],
+            'enableAutoLogin' => true,
+        ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
         ],
@@ -52,7 +56,7 @@ $config = [
                 // add a lot of actions here until you finally completed setting up rbac,
                 // otherwise you may not even take a first step.
             ]
-        ],                
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -94,14 +98,14 @@ $config = [
             'site/*',
             'admin/*',
             'gii/*',
-            'some-controller/some-action',
+            '/seguridad/*',
             // The actions listed here will be allowed to everyone including guests.
             // So, 'admin/*' should not appear here in the production, of course.
             // But in the earlier stages of your development, you may probably want to
             // add a lot of actions here until you finally completed setting up rbac,
             // otherwise you may not even take a first step.
         ]
-    ],    
+    ],
     'params' => $params,
 ];
 

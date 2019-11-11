@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $content string */
 
 
-if (Yii::$app->controller->action->id === 'login' || Yii::$app->controller->route === 'user/recovery/request') {
+if (Yii::$app->controller->action->id === 'login' || Yii::$app->controller->route === 'site/request-password-reset' || Yii::$app->controller->route === 'site/reset-password') {
 /**
  * Do not use this code in your template. Remove it.
  * Instead, use the code  $this->layout = '//main-login'; in your controller.
@@ -17,7 +17,7 @@ if (Yii::$app->controller->action->id === 'login' || Yii::$app->controller->rout
 }
 
 else {
-    if (class_exists('backend\assets\AppAsset')) {
+    if (class_exists('app\assets\AppAsset')) {
         app\assets\AppAsset::register($this);
     } else {
         app\assets\AppAsset::register($this);

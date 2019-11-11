@@ -3,7 +3,8 @@ use yii\helpers\Html;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use mdm\admin\models\User;
-$usuario = User::findIdentity(Yii::$app->user->identity->id);
+use app\modules\seguridad\models\Usuario;
+$usuario = Usuario::findIdentity(Yii::$app->user->identity->id);
 /* @var $this \yii\web\View */
 /* @var $content string */
 ?>
@@ -34,7 +35,7 @@ $usuario = User::findIdentity(Yii::$app->user->identity->id);
                                  alt="User Image"/>-->
                         <?= Html::img("@web/img/perfiles/sysadmin.jpg",['class'=>'img-circle','alt'=>'User Image'])?>
                             <p>
-                                <?=$usuario->username?> -
+                                <?=$usuario->perfil->nombre.' '.$usuario->perfil->primer_apellido.' '.$usuario->perfil->segundo_apellido?> <br/>
                                 <?php foreach ( Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId()) as $role ):?>
                                         <?= Html::encode($role->name) ?>
                                     <?php endforeach;?>
@@ -45,15 +46,15 @@ $usuario = User::findIdentity(Yii::$app->user->identity->id);
                         <li class="user-footer">
                             <div class="pull-left">
                                 <?= Html::a(
-                                    'Cambiar contraseña',
-                                    ['/seguridad/usuario/changepass'],
-                                    ['class' => 'btn btn-default btn-flat']
+                                    'Perfil',
+                                    ['/seguridad/perfil/view','id'=>$usuario->id],
+                                    ['class' => 'btn btn-info btn-flat']
                                 ) ?>
                             </div>
                             <div class="pull-right">
                                 <?= Html::a(
                                     'Salir',
-                                    ['site/logout'],
+                                    ['/site/logout'],
                                     ['data-method' => 'post', 'class' => 'btn btn-danger btn-flat']
                                 ) ?>
                             </div>
@@ -69,7 +70,7 @@ $usuario = User::findIdentity(Yii::$app->user->identity->id);
     <?php Modal::begin([
         'header' => '<h4>Salir</h4>',
         'id'=>'modalsalir',
-        'footer'=>Html::beginForm(['site/logout'], 'post')
+        'footer'=>Html::beginForm(['/site/logout'], 'post')
             . Html::Button('Cancelar',['class' => 'btn btn btn-danger btn-flat','data-dismiss'=>'modal'])
             . Html::submitButton('Aceptar',['class' => 'btn btn btn-primary btn-flat'])
             . Html::endForm(),

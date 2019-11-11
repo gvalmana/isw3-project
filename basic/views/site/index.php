@@ -11,8 +11,7 @@ $this->title = 'My Yii Application';
         <h1>Havanatur</h1>
 
         <p class="lead">El especialista de Cuba.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://localhost/basic/web/noconformidad/">Registrar No conformidad</a></p>
+        <p><?= Html::a('Registrar No conformidad',['/noconformidad'],['class'=>'btn btn-lg btn-success'])?></p>
     </div>
 
     <div class="body-content">

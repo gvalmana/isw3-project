@@ -1,40 +1,71 @@
 <?php
-
 namespace app\models;
 
 use Yii;
-
+use yii\base\NotSupportedException;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
+use Firebase\JWT\JWT;
+use app\models\Perfil;
 /**
- * This is the model class for table "user".
+ * User model
  *
- * @property int $id
+ * @property integer $id
  * @property string $username
- * @property string $auth_key
  * @property string $password_hash
  * @property string $password_reset_token
+ * @property string $verification_token
  * @property string $email
- * @property int $status
- * @property int $created_at
- * @property int $updated_at
- *
- * @property Agencia[] $agencias
- * @property Mercado[] $mercados
- * @property NcAnalizado[] $ncAnalizados
- * @property NcAudit[] $ncAudits
- * @property NcAudit[] $ncAudits0
- * @property NcProdserv[] $ncProdservs
- * @property NcProdserv[] $ncProdservs0
- * @property NcRevisada[] $ncRevisadas
- * @property Sucursal[] $sucursals
+ * @property string $auth_key
+ * @property integer $status
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property string $password write-only password
  */
-class User extends \yii\db\ActiveRecord
+class User extends ActiveRecord implements IdentityInterface
 {
+    const STATUS_DELETED = 0;
+    const STATUS_INACTIVE = 9;
+    const STATUS_ACTIVE = 10;
+
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'user';
+        return '{{%user}}';
+    }
+
+    public function generateAccessToken($expire)
+    {
+        $time = time();
+        $key = 'my_secret_key';
+
+        $token = array(
+            'sub'=>$this->id,
+            'iat' => $time, // Tiempo que inició el token
+            'exp' => $expire, // Tiempo que expirará el token (+1 hora)
+            'data' => [ // información del usuario
+                'id' => $this->id,
+                'username' => $this->username,
+            ]
+        );
+        $jwt = JWT::encode($token, $key);
+
+        $this->access_token=$jwt;
+        return $this->access_token;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
     }
 
     /**
@@ -43,105 +74,180 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'auth_key'], 'string', 'max' => 32],
-            [['password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
+            ['status', 'default', 'value' => self::STATUS_INACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public static function findIdentity($id)
     {
-        return [
-            'id' => 'ID',
-            'username' => 'Username',
-            'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
-            'password_reset_token' => 'Password Reset Token',
-            'email' => 'Email',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-        ];
+        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /*METODO QUE BUSCA UN USUARIO TENIENDO EL TOKEN DE AUTENTICACION*/
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        $user = static::find()->where(['access_token' => $token, 'status' => self::STATUS_ACTIVE])->one();
+        if (!$user) {
+            return false;
+        }
+        if ($user->expire_at < time()) {
+            throw new UnauthorizedHttpException('the access - token expired ', -1);
+        } else {
+            return $user;
+        }
+    }
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByUsername($username)
+    {
+        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * Finds user by password reset token
+     *
+     * @param string $token password reset token
+     * @return static|null
      */
-    public function getAgencias()
+    public static function findByPasswordResetToken($token)
     {
-        return $this->hasMany(Agencia::className(), ['dir_agencia' => 'id']);
+        if (!static::isPasswordResetTokenValid($token)) {
+            return null;
+        }
+
+        return static::findOne([
+            'password_reset_token' => $token,
+            'status' => self::STATUS_ACTIVE,
+        ]);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * Finds user by verification email token
+     *
+     * @param string $token verify email token
+     * @return static|null
      */
-    public function getMercados()
-    {
-        return $this->hasMany(Mercado::className(), ['jefe_mercado' => 'id']);
+    public static function findByVerificationToken($token) {
+        return static::findOne([
+            'verification_token' => $token,
+            'status' => self::STATUS_INACTIVE
+        ]);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * Finds out if password reset token is valid
+     *
+     * @param string $token password reset token
+     * @return bool
      */
-    public function getNcAnalizados()
+    public static function isPasswordResetTokenValid($token)
     {
-        return $this->hasMany(NcAnalizado::className(), ['revisor_nc' => 'id']);
+        if (empty($token)) {
+            return false;
+        }
+
+        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        return $timestamp + $expire >= time();
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * {@inheritdoc}
      */
-    public function getNcAudits()
+    public function getId()
     {
-        return $this->hasMany(NcAudit::className(), ['personal_detecta' => 'id']);
+        return $this->getPrimaryKey();
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * {@inheritdoc}
      */
-    public function getNcAudits0()
+    public function getAuthKey()
     {
-        return $this->hasMany(NcAudit::className(), ['auditor_jefe' => 'id']);
+        return $this->auth_key;
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * {@inheritdoc}
      */
-    public function getNcProdservs()
+    public function validateAuthKey($authKey)
     {
-        return $this->hasMany(NcProdserv::className(), ['creada_por' => 'id']);
+        return $this->getAuthKey() === $authKey;
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * Validates password
+     *
+     * @param string $password password to validate
+     * @return bool if password provided is valid for current user
      */
-    public function getNcProdservs0()
+    public function validatePassword($password)
     {
-        return $this->hasMany(NcProdserv::className(), ['receptor' => 'id']);
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * Generates password hash from password and sets it to the model
+     *
+     * @param string $password
      */
-    public function getNcRevisadas()
+    public function setPassword($password)
     {
-        return $this->hasMany(NcRevisada::className(), ['verificador_nc' => 'id']);
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * Generates "remember me" authentication key
      */
-    public function getSucursals()
+    public function generateAuthKey()
     {
-        return $this->hasMany(Sucursal::className(), ['dir_sucursal' => 'id']);
+        $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
-    public static function ListarUsuariosPorRol($value)
+    /**
+     * Generates new password reset token
+     */
+    public function generatePasswordResetToken()
     {
-        return User::findBySQL("SELECT * FROM `user`INNER JOIN auth_assignment ON user.id=auth_assignment.user_id WHERE auth_assignment.item_name =:value",['value'=>$value])->all();
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+    public function generateEmailVerificationToken()
+    {
+        $this->verification_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+    /**
+     * Removes password reset token
+     */
+    public function removePasswordResetToken()
+    {
+        $this->password_reset_token = null;
+    }
+
+    public function fields()
+    {
+        $fields = parent::fields();
+        // quita los campos con información sensible
+        unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token'], $fields['access_token'],$fields['expire_at']);
+        return $fields;
+    }
+
+    public function extraFields()
+    {
+        return ['profile'];
+    }
+
+    public function getProfile()
+    {
+        return $this->hasOne(Profile::className(), ['id' => 'id']);
     }
 }
