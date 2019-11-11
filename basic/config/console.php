@@ -19,11 +19,11 @@ $config = [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
-        ],        
+        ],
         'log' => [
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    //'class' => 'yii\log\FileTarget',
                     'class' => 'yii\log\DbTarget',
                     'levels' => ['error', 'warning'],
                 ],
