@@ -16,11 +16,32 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
-            'layout'=> 'top-menu',
         ],
         'seguridad' => [
             'class' => 'app\modules\seguridad\Module',
         ],
+        'db-manager' => [
+            'class' => 'bs\dbManager\Module',
+            // path to directory for the dumps
+            'path' => '@app/backups',
+            // list of registerd db-components
+            'customDumpOptions' => [
+                '--ignore-table' => 'bd_optei.log',
+            ],
+            'dbList' => ['db'],
+            'as access' => [
+                'class' => 'yii\filters\AccessControl',
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['administrador'],
+                    ],
+                ],
+            ],
+        ],
+       'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+        ],        
     ],
     'components' => [
         'request' => [
@@ -79,7 +100,8 @@ $config = [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    //'class' => 'yii\log\FileTarget',
+                    'class' => 'yii\log\DbTarget',
                     'levels' => ['error', 'warning'],
                 ],
             ],
