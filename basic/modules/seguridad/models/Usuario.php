@@ -34,9 +34,7 @@ class Usuario extends User
     {
         return 'user';
     }
-    /*public function behaviors(){
-        return [\nhkey\arh\ActiveRecordHistoryBehavior::className(),];
-    }*/
+
     public function behaviors(){
         return [
             'history'=>[
